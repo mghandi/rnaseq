@@ -119,25 +119,25 @@ workflow PIPELINE_COMPLETION {
     //
     // Completion email and summary
     //
-    workflow.onComplete {
-        if (email || email_on_fail) {
-            completionEmail(
-                summary_params,
-                email,
-                email_on_fail,
-                plaintext_email,
-                outdir,
-                monochrome_logs,
-                multiqc_report.toList()
-            )
-        }
+    // workflow.onComplete {
+    //     if (email || email_on_fail) {
+    //         completionEmail(
+    //             summary_params,
+    //             email,
+    //             email_on_fail,
+    //             plaintext_email,
+    //             outdir,
+    //             monochrome_logs,
+    //             multiqc_report.toList()
+    //         )
+    //     }
 
-        rnaseqSummary(monochrome_logs=monochrome_logs, pass_mapped_reads=pass_mapped_reads, pass_trimmed_reads=pass_trimmed_reads, pass_strand_check=pass_strand_check)
+    //     rnaseqSummary(monochrome_logs=monochrome_logs, pass_mapped_reads=pass_mapped_reads, pass_trimmed_reads=pass_trimmed_reads, pass_strand_check=pass_strand_check)
 
-        if (hook_url) {
-            imNotification(summary_params, hook_url)
-        }
-    }
+    //     if (hook_url) {
+    //         imNotification(summary_params, hook_url)
+    //     }
+    // }
 
     workflow.onError {
         log.error "Pipeline failed. Please refer to troubleshooting docs: https://nf-co.re/docs/usage/troubleshooting"
